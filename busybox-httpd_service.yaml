@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: busybox-httpd
+  name: busybox-httpd
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8088
+    protocol: TCP
+    targetPort: 8088
+
+  selector:
+    app: busybox-httpd

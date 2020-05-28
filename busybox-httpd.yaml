@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox-httpd
+  labels:
+    app: busybox-httpd
+spec:
+  containers:
+  - image:  busybox
+    command:
+      - httpd
+    args: ["-v","-f","-p","0.0.0.0:8088","-h","/var/www/html","-c","/var/www/html/httpd.conf"]
+    imagePullPolicy: IfNotPresent
+    name: busybox-httpd
+    volumeMounts:
+    - mountPath: /var/www/html
+      name: tftpboot
+  restartPolicy: Never
+#  restartPolicy: Always
+  volumes:
+  - name: tftpboot
+    nfs:
+      path: /mnt/nfs/pvdata/tftpboot/kickstart
+      server: MY.NFS.FQDN

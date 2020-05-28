@@ -1,0 +1,13 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: busybox-httpd
+  namespace: default
+spec:
+  rules:
+  - host: kickstart.pik8s.home
+    http:
+      paths:
+      - backend:
+          serviceName: busybox-httpd
+          servicePort: 8088
