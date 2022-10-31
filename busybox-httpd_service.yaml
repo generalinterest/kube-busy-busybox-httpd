@@ -5,7 +5,7 @@ metadata:
     app: busybox-httpd
   name: busybox-httpd
 spec:
-  type: ClusterIP
+  type: NodePort
   ports:
   - port: 8088
     protocol: TCP

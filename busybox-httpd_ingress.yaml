@@ -1,13 +1,13 @@
-apiVersion: extensions/v1beta1
-kind: Ingress
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
 metadata:
   name: busybox-httpd
-  namespace: default
 spec:
-  rules:
-  - host: kickstart.pik8s.home
-    http:
-      paths:
-      - backend:
-          serviceName: busybox-httpd
-          servicePort: 8088
+  entryPoints:
+    - web
+  routes:
+  - match: Host(`kickstart.pik8s.home`) && PathPrefix(`/`)
+    kind: Rule
+    services:
+    - name: busybox-httpd
+      port: 8088
